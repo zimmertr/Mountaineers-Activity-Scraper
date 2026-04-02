@@ -2,7 +2,7 @@
 
 ## Summary
 
-This tool allows you to parse important information from a list of [Mountaineers.org](https://www.mountaineers.org/) climb URLs and write it to Google Sheets. 
+Parse important information from a list of [Mountaineers.org](https://www.mountaineers.org/) climb URLs and write the data to Google Sheets
 
 > ⚠️ **Please use this responsibly and DO NOT abuse their servers with aggressive scraping!** ⚠️
 
@@ -26,7 +26,7 @@ This tool allows you to parse important information from a list of [Mountaineers
 ## Instructions
 
 1. Create a Google Cloud account & project: https://console.cloud.google.com/
-2. Enable the Google Sheets & Drive APIs for the project
+2. Enable the Google Sheets & Drive APIs for the project. Both APIs are free to use within quota restrictions for which this script should abide. 
     * https://console.cloud.google.com/apis/library/sheets.googleapis.com
     * https://console.cloud.google.com/apis/library/drive.googleapis.com
 3. Create a service account for the project: https://console.cloud.google.com/iam-admin/serviceaccounts

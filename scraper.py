@@ -57,7 +57,7 @@ def scrape_primary_leader(soup):
                     leader_name = f"{leader_name} ({pos_text})"
                 else:
                     leader_name = pos_text
-            # Strip "(Primary Leader)"
+            # Strip "(Primary Leader)" from cell data
             leader_name = leader_name.replace("(Primary Leader)", "").strip()
             return leader_name
         return ""
@@ -142,7 +142,7 @@ def main():
     HEADERS = ["URL", "Type", "Name", "Description", "Leader", "Date(s)", "Committee",
                "Registration Open", "Non-Priority Registration Open", "Registration Closed",
                "Mileage", "Elevation Gain", "Availability", "Capacity", "Leader's Notes",
-               "Last Updated"]
+               "Last Updated (UTC)"]
 
     # Ensure header exists
     all_rows = ws.get_all_values()

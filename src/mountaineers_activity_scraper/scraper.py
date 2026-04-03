@@ -54,12 +54,12 @@ def build_row(html, url):
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Scrape trip data and output to Google Sheet or CSV")
+    parser = argparse.ArgumentParser(description="Scrape trip data and output to Google Sheet and/or CSV")
     parser.add_argument("--file", required=True, help="Text file with URLs")
-    parser.add_argument("--output", choices=["csv", "google-sheets"], default="csv", help="Output destination: csv (default) or google-sheets")
+    parser.add_argument("--output", choices=["csv", "google-sheets", "both"], default="csv", help="Output destination: csv (default), google-sheets, or both")
     parser.add_argument("--output-file-name", default="output.csv", help="CSV output file name (default: output.csv)")
-    parser.add_argument("--sheet", help="Google Sheet name (required if output is google-sheets)")
-    parser.add_argument("--creds", help="Service account JSON file (required if output is google-sheets)")
+    parser.add_argument("--sheet", help="Google Sheet name (required if output is google-sheets or both)")
+    parser.add_argument("--creds", help="Service account JSON file (required if output is google-sheets or both)")
     return parser.parse_args()
 
 def collect_rows(urls, headers):
@@ -99,11 +99,14 @@ def upload_to_sheets(sheet_name, creds, headers, rows):
             return result
         range_str = f"{col_letter(start_col)}2:{col_letter(end_col)}{len(rows)+1}"
         values = rows
-        sheet_manager.ws.update(range_str, values)
+        sheet_manager.ws.update(values=values, range_name=range_str)
         print(f"Uploaded {len(rows)} rows to Google Sheet '{sheet_name}'")
 
 def main():
     args = parse_args()
+    if args.output in ("google-sheets", "both") and (not args.sheet or not args.creds):
+        print("--sheet and --creds are required for Google Sheets output", flush=True)
+        return
     urls = read_urls(args.file)
     if not urls:
         print("No URLs found", flush=True)
@@ -115,11 +118,9 @@ def main():
         "Last Updated (UTC)"
     ]
     rows = collect_rows(urls, HEADERS)
-    write_csv(args.output_file_name, HEADERS, rows)
-    if args.output == "google-sheets":
-        if not args.sheet or not args.creds:
-            print("--sheet and --creds are required for Google Sheets output", flush=True)
-            return
+    if args.output in ("csv", "both"):
+        write_csv(args.output_file_name, HEADERS, rows)
+    if args.output in ("google-sheets", "both"):
         upload_to_sheets(args.sheet, args.creds, HEADERS, rows)
 
 if __name__ == "__main__":

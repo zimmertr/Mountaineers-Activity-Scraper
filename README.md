@@ -30,7 +30,7 @@ The script accepts the following CLI arguments:
 | Argument              | Required? | Description                                                                                 |
 |-----------------------|-----------|---------------------------------------------------------------------------------------------|
 | --file                | Yes       | Path to the text file containing a list of URLs to scrape                                    |
-| --output              | No        | Output destination: `csv` (default) or `google-sheets`                                      |
+| --output              | No        | Output destination: `csv` (default), `google-sheets`, or `both`                             |
 | --output-file-name    | No        | Output CSV file name (default: `output.csv`)                                                 |
 | --sheet               | Yes*      | Google Sheet name (required if `--output google-sheets`)                                     |
 | --creds               | Yes*      | Path to Google service account JSON file (required if `--output google-sheets`)              |
@@ -47,6 +47,7 @@ docker run --rm \
     -v $(pwd):/data \
     $(docker build -q .) \
     --file /data/urls.txt \
+    --output csv \
     --output-file-name /data/output.csv
 ```
 

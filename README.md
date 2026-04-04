@@ -77,7 +77,7 @@ The following filters are available for use with `--mode collect`:
 | "Type..."                | --filter-type        | Trip, Clinic             |
 | "Climbing Categories"   | --filter-climbing-category | "Basic Alpine", "Rock Climb" |
 | "Snowshoeing Categories" | --filter-snowshoeing-category | Basic, Intermediate |
-| "Difficulties""          | --filter-difficulty  | Easy, "Bikepacking Gravel I", T3, "Winter Scramble"           |
+| "Difficulties"          | --filter-difficulty  | Easy, "Bikepacking Gravel I", T3, "Winter Scramble"           |
 
 You can combine filters for refined results. For example:
 

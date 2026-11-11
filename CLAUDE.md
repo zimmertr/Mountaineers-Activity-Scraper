@@ -18,11 +18,11 @@ File issues with the `create-issue` skill from zimmertr/ai-config: the two-sente
 - **The reader**: TJ, who climbs with The Mountaineers and reads Python.
 - **The gates**: `Docker Build / Docker Build`, `PR Title / PR Title` and the three `Lint /` checks pass; the docs page that owns the topic changes in the same PR; the README changes only to stay accurate.
 - **The constraints**: no credentials in the repo or in logs; the image stays linux/amd64, which the cluster runs.
-- **The areas**: `scraper` (`src/`), `ci` (the workflows, the image and Dependabot), `security`.
+- **The areas**: `scraper` (`src/`), `ci` (the workflows, the image and Renovate), `security`.
 
 ## Working in this repo
 
 - Work in a fresh clone in the session's scratchpad, never in TJ's checkout. Branch from the latest `origin/main`.
 - Everything reaches main through a squash-merged PR. Never push to main.
 - The PR title is `type(scope): summary`; the `PR Title` check refuses anything else.
-- Actions are pinned to commit SHAs with the version in a comment, and the base image to its tag and digest. Dependabot bumps both.
+- Actions are pinned to commit SHAs with the version in a comment, and the base image to its tag and digest. Renovate bumps both.

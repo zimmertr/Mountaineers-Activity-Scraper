@@ -2,7 +2,7 @@ name: PR Title
 
 # The PR title becomes the squash commit's title, and the release reads its
 # version bump from it. yggdrasil's pr-title module refuses a title that isn't
-# `type(scope): summary`. Dependabot's titles (`chore(deps): ...`) already
+# `type(scope): summary`. Renovate's titles (`chore(deps): ...`) already
 # pass.
 #
 # A workflow of its own, because it has to run when only the title changes

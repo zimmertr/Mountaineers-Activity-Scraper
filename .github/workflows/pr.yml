@@ -2,8 +2,8 @@ name: PR Checks
 
 # The image a PR would ship, through yggdrasil's docker-build module: hadolint,
 # the linux/amd64 image built but not pushed, a Trivy table in a sticky
-# comment, the smoke test, then a failure on any fixable Critical or High, as
-# the release would refuse.
+# comment, container-structure-test with tests/structure-test.yaml, then a
+# failure on any fixable Critical or High, as the release would refuse.
 #
 # Branch protection requires `Docker Build / Docker Build` (this job's name,
 # then the module's); renaming either strands PRs on a check that never
@@ -22,13 +22,11 @@ permissions: {}
 jobs:
   docker-build:
     name: Docker Build
-    uses: zimmertr/yggdrasil/.github/workflows/docker-build.yml@fd0ee632ebad3cb4623bd64ca77838e6aa7a2dce # v1.2.4
+    uses: zimmertr/yggdrasil/.github/workflows/docker-build.yml@b662606e82d2291ac62c0ea9b28d3990f575f980 # v1.3.0
     permissions:
       contents: read # the module checks out the repo
       pull-requests: write # the sticky scan comment
     with:
       # What only a built image shows: the entry point starts and every
       # dependency imports on the image's own Python.
-      smoke-test: |
-        docker run --rm "$IMAGE" --help
-        docker run --rm --entrypoint python3 "$IMAGE" -c 'import requests, bs4, gspread, google.auth'
+      structure-test: tests/structure-test.yaml

@@ -1,0 +1,19 @@
+# What only the built image shows, checked by container-structure-test through
+# yggdrasil's docker-build module (its record 0060). The tool replaces the
+# image's entry point for each command, so each names Python itself; the
+# metadata test holds the entry point.
+schemaVersion: 2.0.0
+
+metadataTest:
+  entrypoint: [python3, -m, mountaineers_activity_scraper.cli]
+  workdir: /app
+
+commandTests:
+  - name: the command line starts
+    command: python3
+    args: [-m, mountaineers_activity_scraper.cli, --help]
+    exitCode: 0
+  - name: every dependency imports on the image's own Python
+    command: python3
+    args: [-c, 'import requests, bs4, gspread, google.auth']
+    exitCode: 0

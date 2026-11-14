@@ -22,7 +22,7 @@ permissions: {}
 jobs:
   docker-build:
     name: Docker Build
-    uses: zimmertr/yggdrasil/.github/workflows/docker-build.yml@fd0ee632ebad3cb4623bd64ca77838e6aa7a2dce # v1.2.4
+    uses: zimmertr/yggdrasil/.github/workflows/docker-build.yml@f805e7b874e54e661d8dc8ad528883228bfc567b # v1.2.9
     permissions:
       contents: read # the module checks out the repo
       pull-requests: write # the sticky scan comment

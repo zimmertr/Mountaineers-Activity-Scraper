@@ -22,6 +22,6 @@ permissions: {}
 jobs:
   title:
     name: PR Title
-    uses: zimmertr/yggdrasil/.github/workflows/pr-title.yml@20ecc5dacd84eaf95243364b450bf3800925bc05 # v2.0.3
+    uses: zimmertr/yggdrasil/.github/workflows/pr-title.yml@bb574d28fc80f75825e3fe41e57a57a6c9ac8769 # v2.1.0
     permissions:
       pull-requests: read # the action reads the PR's current title from the API

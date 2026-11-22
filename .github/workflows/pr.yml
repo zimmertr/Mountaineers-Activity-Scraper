@@ -5,9 +5,10 @@ name: PR Checks
 # comment, container-structure-test with tests/structure-test.yaml, then a
 # failure on any fixable Critical or High, as the release would refuse.
 #
-# Branch protection requires `Docker Build / Docker Build` (this job's name,
-# then the module's); renaming either strands PRs on a check that never
-# reports.
+# Branch protection requires `Docker Build / Docker Build
+# (zimmertr/mountaineers-activity-scraper)` (this job's name, then the
+# module's, with the image) and `Dependency Review / Dependency Review`;
+# renaming either strands PRs on a check that never reports.
 on:
   pull_request:
     branches:
@@ -22,11 +23,19 @@ permissions: {}
 jobs:
   docker-build:
     name: Docker Build
-    uses: zimmertr/yggdrasil/.github/workflows/docker-build.yml@c71af5523eef7252d901774a217fe532fdb3209c # v2.7.0
+    uses: zimmertr/yggdrasil/.github/workflows/docker-build.yml@571dc1db86efcdaf2d5289b5e8d34f98b8816a18 # v3.0.1
     permissions:
       contents: read # the module checks out the repo
       pull-requests: write # the sticky scan comment
     with:
-      # What only a built image shows: the entry point starts and every
-      # dependency imports on the image's own Python.
-      structure-test: tests/structure-test.yaml
+      # The release's image, with what only a built image shows: the entry
+      # point starts and every dependency imports on the image's own Python.
+      images: '[{"image": "zimmertr/mountaineers-activity-scraper", "structure-test": "tests/structure-test.yaml"}]'
+
+  # A PR that adds a package version with a known High or Critical
+  # vulnerability fails.
+  dependency-review:
+    name: Dependency Review
+    uses: zimmertr/yggdrasil/.github/workflows/dependency-review.yml@571dc1db86efcdaf2d5289b5e8d34f98b8816a18 # v3.0.1
+    permissions:
+      contents: read

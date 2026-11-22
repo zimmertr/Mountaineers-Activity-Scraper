@@ -16,7 +16,7 @@ This repo took a trimmed set of the files a new project starts with (zimmertr/yg
 File issues with the `create-issue` skill from zimmertr/ai-config: the two-sentence summary, the six sections, the hemingway and humanizer passes, one priority, one type, the area labels and the session label. The skill reads the four things below from this section.
 
 - **The reader**: TJ, who climbs with The Mountaineers and reads Python.
-- **The gates**: `Docker Build / Docker Build`, `PR Title / PR Title` and the three `Lint /` checks pass; the docs page that owns the topic changes in the same PR; the README changes only to stay accurate.
+- **The gates**: `Docker Build / Docker Build (zimmertr/mountaineers-activity-scraper)`, `Dependency Review / Dependency Review`, `PR Title / PR Title` and the five `Lint /` checks pass; the docs page that owns the topic changes in the same PR; the README changes only to stay accurate.
 - **The constraints**: no credentials in the repo or in logs; the image stays linux/amd64, which the cluster runs.
 - **The areas**: `scraper` (`src/`), `ci` (the workflows, the image and Renovate), `security`.
 

@@ -2,7 +2,7 @@ name: Release
 
 # Every merge to main cuts a release through yggdrasil's release module.
 # GitVersion reads the bump from the squash commit's title, the image is pushed
-# to GHCR under that version and scanned, the commit is tagged and
+# to GHCR under that version with signed provenance and scanned, the commit is tagged and
 # released, then a self-merging Kubernetes-Manifests PR points the CronJob at
 # it. On a PR the same job runs as a dry run: the job summary says what the
 # merge will release, and nothing is pushed.
@@ -26,12 +26,14 @@ permissions: {}
 jobs:
   release:
     name: Release
-    uses: zimmertr/yggdrasil/.github/workflows/release.yml@471e1dd37cbd51b1f247fc02f80556677de2a876 # v2.2.1
+    uses: zimmertr/yggdrasil/.github/workflows/release.yml@e229a6868b9d1bf4a596e0a8844452770a543a6c # v3.0.0
     # GitHub refuses to start the run unless the caller grants what the module's
     # tag job asks for, even on a dry run, which never uses it.
     permissions:
       contents: write # the tag and release
       packages: write # the image, pushed to ghcr.io/zimmertr/mountaineers-activity-scraper
+      attestations: write # its signed build provenance
+      id-token: write # the token Sigstore signs it with
     with:
       dry-run: ${{ github.event_name == 'pull_request' }}
       # linux/amd64 only: the cluster is amd64.

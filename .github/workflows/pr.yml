@@ -23,7 +23,7 @@ permissions: {}
 jobs:
   docker-build:
     name: Docker Build
-    uses: zimmertr/yggdrasil/.github/workflows/docker-build.yml@47059cdc3da02c837181fbb16cd5d8647dd968d8 # v3.1.5
+    uses: zimmertr/yggdrasil/.github/workflows/docker-build.yml@1662d921a9f6d3d0ac42d5777bb148f533b0fd5e # v3.1.6
     permissions:
       contents: read # the module checks out the repo
       pull-requests: write # the sticky scan comment
@@ -36,6 +36,6 @@ jobs:
   # vulnerability fails.
   dependency-review:
     name: Dependency Review
-    uses: zimmertr/yggdrasil/.github/workflows/dependency-review.yml@47059cdc3da02c837181fbb16cd5d8647dd968d8 # v3.1.5
+    uses: zimmertr/yggdrasil/.github/workflows/dependency-review.yml@1662d921a9f6d3d0ac42d5777bb148f533b0fd5e # v3.1.6
     permissions:
       contents: read
